@@ -1,0 +1,9 @@
+name: Application tests
+on: [push, pull_request]
+jobs:
+  sockets:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/lab.sh build
+      - run: bash scripts/lab.sh test
