@@ -1,7 +1,7 @@
 # Validation status
 
 Validated on 1 November 2026 using real Mininet hosts, Open vSwitch datapaths,
-OS-Ken, and UDP sockets inside the supplied software-emulated Ubuntu guest.
+OS-Ken, and UDP sockets inside a software-emulated Ubuntu guest used for validation.
 The cloud host kernel could not run Mininet directly; the QEMU guest resolved
 that limitation without changing the host kernel.
 
@@ -19,14 +19,12 @@ that limitation without changing the host kernel.
   network failure events, backup forwarding rules in both directions, nonzero
   backup transit packet counters, queue drops, and receiver outcomes.
 
-Commands executed:
+To reproduce on a supported Ubuntu 22.04 host or VM:
 
 ```sh
 bash scripts/lab.sh build
-bash scripts/lab.sh vm-build
 bash scripts/lab.sh test
-bash scripts/lab.sh vm matrix results/comparison-v2
-python3 scripts/verify_results.py results/comparison-v2
+bash scripts/lab.sh matrix results/comparison
 ```
 
 Guest environment: Ubuntu 22.04, Linux 5.15.0-202-generic, 2 virtual CPUs,
@@ -59,11 +57,7 @@ the distinction between controller completion and application recovery.
 
 - [Full measured report](results/REPORT.md)
 - [Per-client metrics and before/during/after cohorts](results/summary.csv)
-- [Standalone PDF figure](results/comparison.pdf)
 - [Complete raw logs, JSON, forwarding rules and queue counters](results/raw-mininet-runs.tar.gz)
-- [Independent audit output](results/audit.txt)
-- [Automated test log](results/tests.txt)
-- [Artifact checksums](results/SHA256SUMS)
 
 To reproduce the audit, extract the raw archive to a fresh directory and run
 `python3 scripts/verify_results.py <directory>`. To regenerate the report, run

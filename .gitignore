@@ -3,6 +3,5 @@ __pycache__/
 .venv/
 .plot-venv/
 results/*
-!results/.gitkeep
 !results/README.md
 .pytest_cache/

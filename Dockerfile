@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:22.04 AS runtime
+FROM ubuntu:22.04 AS lab
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends mininet openvswitch-switch python3 python3-venv python3-pip iproute2 iputils-ping iperf3 tcpdump procps ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends mininet openvswitch-switch python3 python3-venv python3-pip iproute2 iputils-ping ca-certificates && rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv --system-site-packages /opt/sdn
 COPY requirements-controller.txt /opt/controller-requirements.txt
 RUN --mount=type=secret,id=ca_bundle \
@@ -10,15 +10,6 @@ RUN --mount=type=secret,id=ca_bundle \
 ENV PATH=/opt/sdn/bin:$PATH
 WORKDIR /project
 
-FROM runtime AS lab
-COPY . /project
-ENTRYPOINT ["bash", "/project/scripts/container-entry.sh"]
-CMD ["test"]
-
-FROM runtime AS vm-runtime
-RUN apt-get update && apt-get install -y --no-install-recommends qemu-system-x86 linux-generic busybox-static cpio && rm -rf /var/lib/apt/lists/*
-
-FROM vm-runtime AS vm
 COPY . /project
 ENTRYPOINT ["bash", "/project/scripts/container-entry.sh"]
 CMD ["test"]

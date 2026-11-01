@@ -16,8 +16,7 @@ The supplied installation guide's package-manager approach is used inside the
 container. Docker shares the host kernel: installing packages alone cannot add
 missing Open vSwitch, veth, HTB, or netem functionality to a restricted kernel.
 On a supported native Ubuntu VM, load the modules before the Docker demo with
-`sudo modprobe -a openvswitch veth sch_htb sch_netem`. The cloud QEMU mode below
-loads modules inside its own guest instead.
+`sudo modprobe -a openvswitch veth sch_htb sch_netem`.
 
 ```sh
 git clone https://github.com/DeevamJain/CN--SDN-mininet-Project.git
@@ -44,20 +43,6 @@ bash scripts/lab.sh matrix results/comparison
 # Generated: per-run JSON/logs, comparison/summary.csv, comparison/REPORT.md
 # The matrix also audits forwarding paths and actual receiver outcomes.
 ```
-
-If the cloud host kernel lacks Mininet modules, the included software-emulated
-Ubuntu guest supplies its own kernel without changing the host:
-
-```sh
-bash scripts/lab.sh vm-build
-bash scripts/lab.sh vm demo dynamic normal results/guest-normal
-bash scripts/lab.sh vm matrix results/guest-comparison
-```
-
-This mode uses QEMU TCG, 2 virtual CPUs, 1536 MiB RAM, and no external network
-adapter. It is slower than a hardware-assisted Ubuntu VM. Its root filesystem
-is the disposable lab container shared over 9p; runtime state is in guest tmpfs.
-Use one guest at a time per container. It requires Linux x86-64 Docker.
 
 The experiment tests initial connectivity, injects the fault after 0.8 seconds,
 waits for the clients, captures controller events, flow tables, queue counters,
@@ -127,5 +112,5 @@ Internet-facing transfer service.
 
 See [protocol and control API](docs/protocol.md), [evaluation methodology](docs/evaluation.md),
 [demo and viva guide](docs/demo.md), and [validation status](docs/validation.md).
-Do not present unrun experiments as results. The final code must be pushed to
-the GitHub repository before submission; local files alone are not publication.
+The repository includes the measured report and raw evidence for the completed
+18-experiment comparison. Use fresh runs to evaluate changes.
