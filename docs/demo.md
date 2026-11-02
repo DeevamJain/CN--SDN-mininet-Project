@@ -1,5 +1,9 @@
 # D1/D2 demonstration and viva
 
+Prepare with the [ordered presentation and speaker notes](presentation.md).
+For supporting documents and source-reading order, use the
+[documentation guide](README.md).
+
 ## D1 (15 marks)
 
 1. Explain the loss-recovery problem, four-switch topology and out-of-band

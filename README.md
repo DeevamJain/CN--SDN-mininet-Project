@@ -9,6 +9,12 @@ receiver. Static routing provides the comparison baseline.
 an independent audit of backup forwarding and receiver delivery. See the
 [measured results and raw evidence](docs/validation.md).
 
+## Presentation and reading order
+
+Start with the [documentation guide](docs/README.md). For the faculty
+presentation, open the [ordered slides and speaker notes](docs/presentation.md),
+then follow the [live demo and viva guide](docs/demo.md).
+
 ## Quick start
 
 Use Ubuntu 22.04 in a VM or Linux host with Mininet-compatible kernel support.
